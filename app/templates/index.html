@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+<!-- Styles block -->
+
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+<!-- Content block -->
+{% block content %}
+
+<div class="container">
+    <form>
+        <input type="text" name="movie_query" placeholder="Search for a pitches" class="form-control">
+        <input type="submit"  value="Submit" class="btn btn-default">
+    </form>
+
+</div>
+
+<div class="container">
+
+    <!-- Popular pitches -->
+    <div class="row">
+        <h3> Popular Pitches</h3>
+        <ul>
+            {{ macro.display(popular)}}
+        </ul>
+    </div>
+    <!-- interview  -->
+    <div class="row">
+
+        <h3> Interview pitches </h3>
+        <ul>
+            {{ macro.display(interview)}}
+        </ul>
+    </div>
+
+    <!-- Pick-up -->
+    <div class="row">
+
+        <h3>Pick-up Pitches</h3>
+        <ul>
+            {{ macro.display(pickup)}}
+        </ul>
+    </div>
+
+</div>
+
+
+
+{% endblock%}
