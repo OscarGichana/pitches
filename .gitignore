@@ -3,6 +3,6 @@ virtual
 .vscode
 *pyc
 __pycache__
-start.sh
+./start.sh
 instance
 config
