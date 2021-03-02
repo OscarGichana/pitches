@@ -5,3 +5,4 @@ virtual
 __pycache__
 start.sh
 instance
+config

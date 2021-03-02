@@ -6,6 +6,7 @@ from ..models import Pitch,User
 from flask_login import login_required, current_user
 from .. import db,photos
 import markdown2  
+from flask_simplemde import SimpleMDE
 
 
 @main.route('/')
@@ -19,39 +20,39 @@ def index():
     pitches = Pitch.query.all()
     popular = Pitch.query.filter_by(category = 'popular').all()
     interview = Pitch.query.filter_by(category = 'interview').all()
-    pichup = Pitch.query.filter_by(category = 'pickup').all()
-
+    pickup = Pitch.query.filter_by(category = 'pickup').all()
+    print(pitches)
     title = 'Pitch'
 
-    return render_template('index.html', title = title, popular = popular, interview = interview, pickup = pick-up )
+    return render_template('index.html', title = title, popular = popular, interview = interview, pickup = pickup )
 
 
 @main.route('/new_pitch', methods = ['GET','POST'])
 @login_required
-def new_pitch(id):
+def new_pitch():
     form = PitchForm()
     if form.validate_on_submit():
         title = form.title.data
-        pitch = form.pitch.data
         category = form.category.data
+        post = form.post.data
         user_id = current_user
 
         # Updated pitch instance        #
-        new_pitch = Pitch(pitch=pitch,movie_title=title,category=category,user_id=current_user)
+        new_pitch = Pitch(post=post,title=title,category=category,user_id=current_user)
 
         # save pitch method
         new_pitch.save_pitch()
         return redirect(url_for('.new_pitch'))
 
     title = 'Pitch'
-    return render_template('new_pitch.html',title = title, form=form, pitch=pitch, category=category)
+    return render_template('new_pitch.html',title = title, form=form)
 
 
 
-@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@main.route('/user/<name>/update',methods = ['GET','POST'])
 @login_required
-def update_profile(uname):
-    user = User.query.filter_by(username = uname).first()
+def update_profile(name):
+    user = User.query.filter_by(username = name).first()
     if user is None:
         abort(404)
 
@@ -63,14 +64,14 @@ def update_profile(uname):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('.profile',uname=user.username))
+        return redirect(url_for('.profile',name=user.username))
 
     return render_template('profile/update.html',form =form)
 
 
-@main.route('/user/<uname>')
-def profile(uname):
-    user = User.query.filter_by(username = uname).first()
+@main.route('/user/<name>')
+def profile(name):
+    user = User.query.filter_by(username = name).first()
 
     if user is None:
         abort(404)
@@ -79,14 +80,14 @@ def profile(uname):
 
 @main.route('/user/<name>/update/pic',methods= ['POST'])
 @login_required
-def update_pic(uname):
-    user = User.query.filter_by(username = uname).first()
+def update_pic(name):
+    user = User.query.filter_by(username = name).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname))
+    return redirect(url_for('main.profile',name=name))
 
 @main.route('/like/<int:id>',methods = ['POST','GET'])
 @login_required
@@ -139,3 +140,11 @@ def comment(pitch_id):
         new_comment.save_comment()
         return redirect(url_for('.comment', pitch_id = pitch_id))
     return render_template('comment.html', form =form, pitch = pitch,all_comments=all_comments)
+
+@main.route('/review/<int:id>')
+def single_pitch(id):
+    pitch=Pitch.query.get(id)
+    if new_pitch is None:
+        abort(404)
+    format_pitch = markdown2.markdown(pitch.new_pitch,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('new_pitch.html',pitch = pitch,format_ptch=format_pitch)

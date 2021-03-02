@@ -8,28 +8,27 @@
     <div class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"> Watchlist </a>
+                <a class="navbar-brand" href="/"> Pitches </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
+                    <li><a href="/new_pitch">New Pitch</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                   {% if current_user.is_authenticated %}
-                  <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
-                  <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+                  <li class="nav-item"><a  class="nav-link" href="{{url_for('auth.logout')}}" style= 'margin-right:30px'><i class="fas fa-sign-out-alt"></i>&nbsp; <strong>Sign Out</strong></a></li>
+
+                  <li class="nav-item"><a  class="nav-link"  href="{{url_for('main.profile',name=current_user.username)}}" style= 'margin-right:30px'><i class="fas fa-user"></i>&nbsp; <strong>My Account</strong></a></li>
+
                   {% else %}
-                  <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+                  <li class="nav-item"><a  class="nav-link" href="{{url_for('auth.login')}}" style= 'margin-right:30px'><i class="fas fa-sign-in-alt"></i>&nbsp; <strong>Log In</strong></a></li>
+                  <li class="nav-item"><a style= 'margin-right:30px' class="nav-link" href="{{url_for('auth.register')}}"><i class="fas fa-user-plus"></i></i>&nbsp; <strong>Sign Up</strong></a></li>
                   {%endif%}
-                </ul>
-            </div>
+        
+              </ul>
+                    </div>
 
         </div>
     </div>

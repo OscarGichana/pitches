@@ -1,52 +1,77 @@
 {% extends 'base.html'%}
-{% import 'macros.html' as macro%}
-
-<!-- Styles block -->
-
+{% import 'macros.html' as macro %}
 {% block styles%}
     {{ super() }}
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 {% endblock %}
-<!-- Content block -->
+
 {% block content %}
-
-<div class="container">
-    <form>
-        <input type="text" name="movie_query" placeholder="Search for a pitches" class="form-control">
-        <input type="submit"  value="Submit" class="btn btn-default">
-    </form>
-
-</div>
-
-<div class="container">
-
-    <!-- Popular pitches -->
-    <div class="row">
-        <h3> Popular Pitches</h3>
-        <ul>
-            {{ macro.display(popular)}}
-        </ul>
-    </div>
-    <!-- interview  -->
-    <div class="row">
-
-        <h3> Interview pitches </h3>
-        <ul>
-            {{ macro.display(interview)}}
-        </ul>
-    </div>
-
-    <!-- Pick-up -->
-    <div class="row">
-
-        <h3>Pick-up Pitches</h3>
-        <ul>
-            {{ macro.display(pickup)}}
-        </ul>
-    </div>
-
-</div>
-
-
-
+    
+        <div  class="container" id="particles-js">
+                <h2 class="text-center" id="posts">Favorites</h2>
+            <div class="tab-content">
+                <div class ="row">
+                    <div class = "col-sm-6">
+                        <div class="w3-card-4" style="width:80%; margin: 3px; padding: 3px; border: 3px;">
+                            <header class="w3-container w3-blue">
+                                <h1>Pick-up Pitches</h1>
+                            </header>
+                        
+                            <div class="w3-container">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        
+                            <footer class="w3-container w3-blue">
+                                <h5><a href="{{url_for('auth.login')}}">Comment on this pitch</a></h5> 
+                            </footer>
+                        </div>
+                    
+                    </div>
+                    <div class = "col-sm-6">
+                        <div class="w3-card-4" style="width:80%; margin: 3px; padding: 3px; border: 3px;">
+                            <header class="w3-container w3-blue">
+                                <h1>Interview Pitches</h1>
+                            </header>
+                        
+                            <div class="w3-container">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        
+                            <footer class="w3-container w3-blue">
+                                <h5><a href="{{url_for('auth.login')}}">Comment on this pitch</a></h5> 
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class = "col-sm-6">
+                        <div class="w3-card-4" style="width:80%; margin: 3px; padding: 3px; border: 3px;">
+                            <header class="w3-container w3-blue">
+                                <h1>Pick-up Pitches</h1>
+                            </header>
+                        
+                            <div class="w3-container">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                        
+                            <footer class="w3-container w3-blue">
+                                <h5><a href="{{url_for('auth.login')}}">Comment on this pitch</a></h5> 
+                            </footer>
+                        </div>
+                    
+                    </div>
+                                    <div  class="container tab-pane fade" id="ads"><br>
+                    {{ macro.display(pickup) }}
+                    
+                </div>
+            </div>
+        </div>
 {% endblock%}
+
+</div>
+<hr/>
+<!-- Pick-up -->
+</div>

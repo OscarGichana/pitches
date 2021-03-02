@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.secure_password,password) 
     
-    def save_user(self):
+    def save_u(self):
         db.session.add(self)
         db.session.commit()
 
@@ -51,7 +51,7 @@ class Pitch(db.Model):
     time = db.Column(db.DateTime, default = datetime.utcnow)
     category = db.Column(db.String(255), index = True,nullable = False)
     
-    def save_p(self):
+    def save_pitch(self):
         db.session.add(self)
         db.session.commit()
 
@@ -100,8 +100,6 @@ class Upvote(db.Model):
 
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'
-
-
 class Downvote(db.Model):
     __tablename__ = 'downvotes'
 
@@ -120,8 +118,6 @@ class Downvote(db.Model):
 
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'
-
-        
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
