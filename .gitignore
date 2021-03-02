@@ -1,8 +1,7 @@
 virtual/
-.env/
-.vscode/
-*pyc/
-__pycache__/
-start.sh/
-instance/
-config/
+.env
+.vscode
+*pyc
+__pycache__
+.sh/
+instance
