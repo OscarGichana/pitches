@@ -1,4 +1,4 @@
-from app.models import Review,User
+from app.models import Pitch,User
 from app import db
 import unittest
 
@@ -6,8 +6,7 @@ import unittest
 class TestReview(unittest.TestCase):
 
     def setUp(self):
-        self.user_James = User(username = 'James',secure_password = 'potato', email = 'james@ms.com')
-        self.new_pitch = Pitch(title='Pitch for movies',category="movies"post="hooohohhhoooo",user = self.user_James )
+        self.new_pitch = Pitch(title='Pitch for movies',category="movies",post="hooohohhhoooo")
 
     def test_save_pitch(self):
         self.new_pitch.save_pitch()
