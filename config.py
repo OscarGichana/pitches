@@ -1,38 +1,23 @@
 import os
 from flask_simplemde import SimpleMDE
+from dotenv import load_dotenv
+load_dotenv()
 
 class Config:
-
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://oscar:123@localhost/pitching'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS=True
+    SECRET_KEY=os.environ.get('SECRET_KEY')
     UPLOADED_PHOTOS_DEST ='app/static/photos'
-
-#  email configurations
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
- 
-    # simple mde  configurations
-    SIMPLEMDE_JS_IIFE = True
-    SIMPLEMDE_USE_CDN = True
-
-
-    @staticmethod
-    def init_app(app):
-        pass
-
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://oscar:123@localhost/pitching'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
-
-
-class TestConfig(Config):
-    DEBUG = True
-    
 class DevConfig(Config):
     DEBUG = True
 
