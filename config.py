@@ -4,7 +4,7 @@ from flask_simplemde import SimpleMDE
 class Config:
 
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://oscar:123@localhost/pitching'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://oscar:123@localhost/pitching'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
@@ -26,7 +26,7 @@ class Config:
 
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://oscar:123@localhost/pitching'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://oscar:123@localhost/pitching'
 
 
 
