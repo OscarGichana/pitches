@@ -3,5 +3,5 @@ virtual/
 .vscode
 *pyc
 __pycache__
-./start.sh
+.sh
 instance/
