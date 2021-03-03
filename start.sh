@@ -1,5 +1,6 @@
 export SECRET_KEY='Flask WTF Secret Key'
 export MAIL_USERNAME='gichanaoscar3@gmail.com'
-export MAIL_PASSWORD=d96de410-23b1-46b0-9ed8-f402afabc5df
+export MAIL_PASSWORD=37600001128
+export SQLALCHEMY_DATABASE_URI= 'postgresql+psycopg2://oscar:123@localhost/pitching'
 
 python3.8 manage.py server
