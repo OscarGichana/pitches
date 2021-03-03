@@ -5,7 +5,6 @@ from .forms import PitchForm,UpdateProfile,CommentForm
 from ..models import Pitch,User
 from flask_login import login_required, current_user
 from .. import db,photos
-import markdown2  
 from flask_simplemde import SimpleMDE
 
 
